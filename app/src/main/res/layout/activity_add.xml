@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="26dp">
+
+
+    <TextView
+        android:id="@+id/foodName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"/>
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:hint="name"
+        android:layout_toEndOf="@+id/quantity"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="20dp"/>
+
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quantity (g):"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="70dp"/>
+
+    <EditText
+        android:id="@+id/gramEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:hint="0.0"
+        android:layout_toEndOf="@+id/quantity"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="70dp"/>
+
+
+    <TextView
+        android:id="@+id/calories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cal:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="120dp"/>
+
+    <EditText
+        android:id="@+id/calEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:hint="0.0"
+        android:layout_toEndOf="@+id/quantity"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="120dp"/>
+
+
+    <TextView
+        android:id="@+id/carbs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carb:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="170dp"/>
+
+    <EditText
+        android:id="@+id/carbEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:hint="0.0"
+        android:layout_toEndOf="@+id/quantity"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="170dp"/>
+
+
+    <TextView
+        android:id="@+id/proteins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prot: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="220dp"/>
+
+    <EditText
+        android:id="@+id/protEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:hint="0.0"
+        android:layout_toEndOf="@+id/quantity"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="220dp"/>
+
+
+    <TextView
+        android:id="@+id/fats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fat: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="270dp"/>
+
+    <EditText
+        android:id="@+id/fatEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:hint="0.0"
+        android:layout_toEndOf="@+id/quantity"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="270dp"/>
+
+    <ImageView
+        android:id="@+id/addFoodImageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/gray"
+        android:layout_marginTop="330dp"/>
+    <TextView
+        android:text="Add a Picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/quantity"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="330dp"/>
+
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        android:textColor="@color/buttonTextColor"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:padding="20dp"
+        android:theme="@style/MyButton"
+        android:layout_marginTop="380dp"
+        android:layout_marginLeft="190dp"/>
+
+</RelativeLayout>

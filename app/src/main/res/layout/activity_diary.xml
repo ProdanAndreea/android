@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.google.firebase.codelab.friendlychat.Diary">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/diaryRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/progressBar" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/diaryRecyclerView"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/diaryItemColor">
+
+
+        <TextView
+            android:id="@+id/foodImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="Total"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/textColor"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+
+        <RelativeLayout
+            android:layout_width="218dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="55dp"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+
+            <TextView
+                android:id="@+id/foodTextCalView_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/foodCalView_2"
+                android:layout_weight="0"
+                android:text="calories: "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodCalView_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/foodTextCalView_2"
+                android:layout_weight="0"
+                android:textColor="@color/textColor"
+                android:text="0 "
+
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodTextCarbView_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/foodCarbView_2"
+                android:layout_weight="0"
+                android:text="carbs: "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodCarbView_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/foodCalView_2"
+                android:layout_toEndOf="@+id/foodTextCarbView_2"
+                android:layout_weight="0"
+                android:text="0 "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodTextProtView_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/foodProtView_2"
+                android:layout_weight="0"
+                android:text="proteins: "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodProtView_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/foodCarbView_2"
+                android:layout_toEndOf="@+id/foodTextProtView_2"
+                android:layout_weight="0"
+                android:text="0 "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodTextFatView_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/foodTextProtView_2"
+                android:layout_weight="0"
+                android:text="fats: "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodFatView_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/foodProtView_2"
+                android:layout_toEndOf="@+id/foodTextFatView_2"
+                android:layout_weight="0"
+                android:text="0 "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_below="@+id/diaryRecyclerView"
+        android:layout_marginTop="100dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="40dp"
+            android:text="Remained"
+            android:textColor="@color/textColor"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <RelativeLayout
+            android:layout_width="218dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/foodTextCalView_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/foodCalView_3"
+                android:layout_weight="0"
+                android:text="calories: "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodCalView_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/foodTextCalView_3"
+                android:layout_weight="0"
+                android:text="0 "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodTextCarbView_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/foodCarbView_3"
+                android:layout_weight="0"
+                android:text="carbs: "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodCarbView_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/foodCalView_3"
+                android:layout_toEndOf="@+id/foodTextCarbView_3"
+                android:layout_weight="0"
+                android:text="0 "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodTextProtView_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/foodProtView_3"
+                android:layout_weight="0"
+                android:text="proteins: "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodProtView_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/foodCarbView_3"
+                android:layout_toEndOf="@+id/foodTextProtView_3"
+                android:layout_weight="0"
+                android:text="0 "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodTextFatView_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/foodTextProtView_3"
+                android:layout_weight="0"
+                android:text="fats: "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodFatView_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/foodProtView_3"
+                android:layout_toEndOf="@+id/foodTextFatView_3"
+                android:layout_weight="0"
+                android:text="0 "
+                android:textColor="@color/textColor"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
+
+
+
+
+</RelativeLayout>

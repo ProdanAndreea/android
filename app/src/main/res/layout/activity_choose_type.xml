@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.google.firebase.codelab.friendlychat.ChooseType"
+    android:layout_marginLeft="10dp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="23dp"
+        android:layout_marginTop="20dp"
+        android:text="As what type of user do you want to sign up?"
+
+        />
+
+    <RadioGroup
+        android:id="@+id/radioChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <RadioButton
+            android:id="@+id/radioClient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Client / Default user"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/radioTrainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trainer"
+            android:layout_marginTop="20dp"/>
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:textColor="#ffffff"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="130dp"
+        android:theme="@style/MyButton"/>
+
+
+
+
+</LinearLayout>

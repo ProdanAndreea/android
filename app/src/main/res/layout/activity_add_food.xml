@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.google.firebase.codelab.friendlychat.AddFood">
+
+    <ImageView
+        android:id="@+id/foodImageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/gray"
+        android:layout_above="@+id/foodName"
+        android:layout_alignStart="@+id/foodName"
+        android:layout_marginBottom="31dp" />
+
+
+
+    <TextView
+        android:id="@+id/foodName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginBottom="65dp"
+        android:layout_alignStart="@+id/quantity"
+        android:layout_above="@+id/quantity"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Name"
+        android:layout_alignTop="@+id/foodName"
+        android:layout_toEndOf="@+id/foodName" />
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:text="Quantity (g): "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginStart="26dp"
+        android:layout_alignBottom="@+id/gramEditText"
+        android:layout_alignParentStart="true" />
+
+
+    <EditText
+        android:id="@+id/gramEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:hint="0.0"
+        android:layout_below="@+id/foodAllergyImageView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="152dp"
+        android:layout_toEndOf="@+id/quantity"/>55
+
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="ADD"
+        android:textColor="@color/buttonTextColor"
+        android:textStyle="bold"
+        android:layout_below="@+id/quantity"
+        android:layout_marginLeft="145dp"
+        android:textSize="15dp"
+        android:padding="20dp"
+        android:theme="@style/MyButton"/>
+
+
+    <ImageView
+        android:id="@+id/foodAllergyImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="90dp"
+        />
+
+    <TextView
+        android:id="@+id/foodAllergyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="90dp"
+        android:textSize="15dp"
+        android:textColor="#ff0000"
+        />
+
+
+
+</RelativeLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2B3856</color> <!-- #ff9800-->
+    <color name="colorPrimaryDark">#060d0f</color>
+    <color name="colorAccent">#04759A</color>
+    <color name="colorTitle">#ffffff</color>
+    <color name="colorText">#ffffff</color>
+
+
+    <!-- mine -->
+    <color name="background">#ffffff</color>
+    <color name="indigo">#00DDD5</color>
+    <color name="pink">#E3515C</color>
+    <color name="grey">#555555</color>
+
+    <color name="itemColor">#1B2032</color>
+    <color name="textColor">#ffffff</color>
+
+    <color name="buttonTextColor">#ffffff</color>
+    <color name="diaryItemColor">#1B2032</color>
+
+
+</resources>

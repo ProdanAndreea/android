@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.google.firebase.codelab.friendlychat.DisplayPersonalData">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Personal Data"
+        android:textColor="@color/grey"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/weightView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"/>
+    <TextView
+        android:id="@+id/weightTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/grey"
+        android:text="0"
+        android:layout_toEndOf="@+id/weightView"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:id="@+id/activityView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activity: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="65dp" />
+    <TextView
+        android:id="@+id/activityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/grey"
+        android:text="-"
+        android:layout_toEndOf="@+id/activityView"
+        android:layout_marginTop="65dp" />
+
+    <TextView
+        android:id="@+id/sexView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sex: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="90dp" />
+    <TextView
+        android:id="@+id/sexTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/grey"
+        android:text="-"
+        android:layout_toEndOf="@+id/sexView"
+        android:layout_marginTop="90dp" />
+
+    <TextView
+        android:id="@+id/scopeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Goal: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="115dp" />
+    <TextView
+        android:id="@+id/scopeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/grey"
+        android:text="-"
+        android:layout_toEndOf="@+id/scopeView"
+        android:layout_marginTop="115dp" />
+
+    <TextView
+        android:id="@+id/allergiesView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Allergies: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="140dp" />
+    <TextView
+        android:id="@+id/allergiesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/grey"
+        android:text="-"
+        android:layout_toEndOf="@+id/allergiesView"
+        android:layout_marginTop="140dp" />
+
+    <TextView
+        android:id="@+id/desiredWView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Desired Weight: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="165dp" />
+    <TextView
+        android:id="@+id/desiredWTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/grey"
+        android:text="-"
+        android:layout_toEndOf="@+id/desiredWView"
+        android:layout_marginTop="165dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Necessary macro"
+        android:textColor="@color/grey"
+        android:layout_marginTop="200dp" />
+
+    <TextView
+        android:id="@+id/calView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cal: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="230dp" />
+    <TextView
+        android:id="@+id/calTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/grey"
+        android:text="0"
+        android:layout_toEndOf="@+id/calView"
+        android:layout_marginTop="230dp" />
+
+    <TextView
+        android:id="@+id/carbView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carb: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="255dp"/>
+    <TextView
+        android:id="@+id/carbTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/grey"
+        android:text="0"
+        android:layout_toEndOf="@+id/carbView"
+        android:layout_marginTop="255dp" />
+
+    <TextView
+        android:id="@+id/protView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prot: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="280dp" />
+    <TextView
+        android:id="@+id/protTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/grey"
+        android:text="0"
+        android:layout_toEndOf="@+id/protView"
+        android:layout_marginTop="280dp" />
+
+    <TextView
+        android:id="@+id/fatView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fat: "
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="305dp" />
+    <TextView
+        android:id="@+id/fatTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/grey"
+        android:text="0"
+        android:layout_toEndOf="@+id/fatView"
+        android:layout_marginTop="305dp" />
+
+    </RelativeLayout>
+
+
+
+    <Button
+        android:id="@+id/change_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_below="@+id/quantity"
+        android:layout_alignStart="@+id/gramEditText"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="74dp"
+        android:theme="@style/MyButton"/>
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_below="@+id/quantity"
+        android:layout_alignStart="@+id/gramEditText"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="210dp"
+        android:theme="@style/MyButton"/>
+
+
+
+
+
+</RelativeLayout>
