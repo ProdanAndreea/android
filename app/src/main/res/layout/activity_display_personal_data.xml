@@ -220,24 +220,8 @@
         android:layout_below="@+id/quantity"
         android:layout_alignStart="@+id/gramEditText"
         android:layout_marginTop="400dp"
-        android:layout_marginLeft="74dp"
+        android:layout_marginLeft="144dp"
         android:theme="@style/MyButton"/>
-
-    <Button
-        android:id="@+id/add_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:layout_below="@+id/quantity"
-        android:layout_alignStart="@+id/gramEditText"
-        android:layout_marginTop="400dp"
-        android:layout_marginLeft="210dp"
-        android:theme="@style/MyButton"/>
-
-
-
 
 
 </RelativeLayout>
