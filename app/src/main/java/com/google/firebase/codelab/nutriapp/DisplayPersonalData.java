@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.friendlychat;
+package com.google.firebase.codelab.nutriapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,8 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
+
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -18,14 +18,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.TextView;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-public class AddNewFood extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class DisplayPersonalData extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     public static final String ANONYMOUS = "anonymous";
-    private static final String TAG = "AddNewFood";
+    private static final String TAG = "MainActivity";
+    public static final int DEFAULT_MSG_LENGTH_LIMIT = 6;
 
     private String mUsername;
     private String mPhotoUrl;
@@ -37,13 +43,12 @@ public class AddNewFood extends AppCompatActivity implements GoogleApiClient.OnC
     private DatabaseReference mFirebaseDatabaseReference;
 
     private Button button;
-    private ImageView mAddFoodImageView;
-    EditText txt;
+    private String formattedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_display_personal_data);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUsername = ANONYMOUS;
@@ -69,85 +74,87 @@ public class AddNewFood extends AppCompatActivity implements GoogleApiClient.OnC
                 .addApi(Auth.GOOGLE_SIGN_IN_API)
                 .build();
 
+        // search for the specific food and get its data
+        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference().child("clients");
+        mFirebaseDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    Client client = postSnapshot.getValue(Client.class);
+                    if (client.getName().equals(mFirebaseUser.getDisplayName())) {
+                        TextView weight = findViewById(R.id.weightTextView);
+                        TextView activity = findViewById(R.id.activityTextView);
+                        TextView sex = findViewById(R.id.sexTextView);
+                        TextView goal = findViewById(R.id.scopeTextView);
+                        TextView allergies = findViewById(R.id.allergiesTextView);
+                        TextView cal = findViewById(R.id.calTextView);
+                        TextView carb = findViewById(R.id.carbTextView);
+                        TextView prot = findViewById(R.id.protTextView);
+                        TextView fat = findViewById(R.id.fatTextView);
 
-        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+                        weight.setText(client.getWeight());
+                        activity.setText(client.getActivity());
+                        sex.setText(client.getSex());
+                        goal.setText(client.getScope());
+                        allergies.setText(client.getAllergies());
+                        cal.setText(Float.toString(client.getCal()));
+                        carb.setText(Float.toString(client.getCarb()));
+                        prot.setText(Float.toString(client.getProt()));
+                        fat.setText(Float.toString(client.getFat()));
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError firebaseError) {}
+        });
 
         button = (Button) findViewById(R.id.add_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Food food = new Food();
                 try {
-                    // get input data from 'R.id.nameEditText' and try to add it to food
-                } catch(NumberFormatException e) {
-                    txt = (EditText) findViewById(R.id.nameEditText);
-                    txt.setError("Wrong input !");
-                }
-                try {
-                } catch(NumberFormatException e) {
-                    txt = (EditText) findViewById(R.id.gramEditText);
-                    txt.setError("Wrong input !");
-                }
-                try {
-                } catch(NumberFormatException e) {
-                    txt = (EditText) findViewById(R.id.calEditText);
-                    txt.setError("Wrong input !");
-                }
-                try {
-                } catch(NumberFormatException e) {
-                    txt = (EditText) findViewById(R.id.carbEditText);
-                    txt.setError("Wrong input !");
-                }
-                try {
-                } catch(NumberFormatException e) {
-                    txt = (EditText) findViewById(R.id.protEditText);
-                    txt.setError("Wrong input !");
-                }
-                try {
-                } catch(NumberFormatException e) {
-                    txt = (EditText) findViewById(R.id.fatEditText);
-                    txt.setError("Wrong input !");
-                }
-
-                // get the photo and add it to food
-                // if there isn't one, the default one (grey) will be put
 
 
-                // add the food to the fire base
-                // go to foods table to see the new added food
-               // startActivity(new Intent(AddNewFood.this, Foods.class));
+                } catch(NumberFormatException e) {
+                }
+
             }
         });
     }
+
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 
+
     // create right top the menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.foods_menu, menu);
+        inflater.inflate(R.menu.display_personal_data_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.add_food:
-                startActivity(new Intent(this, AddNewFood.class));
-                return true;
-            case R.id.display_personal_data_menu:
-                startActivity(new Intent(this, DisplayPersonalData.class));
-                return true;
             case R.id.diary_menu:
-                startActivity(new Intent(this, ChooseDate.class));
+                // get current date
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                formattedDate = df.format(c.getTime());
+
+                Intent intent = new Intent(this, Diary.class);
+                intent.putExtra("DATE", formattedDate);
+                startActivity(intent);
+                return true;
+            case R.id.food_menu:
+                startActivity(new Intent(this, Foods.class));
                 return true;
             case R.id.chat_menu:
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(this, MainActivity.class));
                 return true;
             case R.id.sign_out_menu:
                 mFirebaseAuth.signOut();
@@ -161,12 +168,6 @@ public class AddNewFood extends AppCompatActivity implements GoogleApiClient.OnC
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 
 }

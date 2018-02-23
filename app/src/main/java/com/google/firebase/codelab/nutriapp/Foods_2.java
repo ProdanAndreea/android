@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.friendlychat;
+package com.google.firebase.codelab.nutriapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

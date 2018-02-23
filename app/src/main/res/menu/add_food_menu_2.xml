@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.google.firebase.codelab.friendlychat.AddFood_2_2">
+    tools:context="com.google.firebase.codelab.nutriapp.AddFood_2_2">
 
     <item
         android:id="@+id/sign_out_menu"

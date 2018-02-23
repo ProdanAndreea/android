@@ -1,19 +1,11 @@
-package com.google.firebase.codelab.friendlychat;
+package com.google.firebase.codelab.nutriapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Observable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import android.widget.Button;
 
@@ -28,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class ChooseType extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {

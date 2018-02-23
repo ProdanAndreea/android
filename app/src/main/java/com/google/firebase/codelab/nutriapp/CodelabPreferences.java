@@ -1,5 +1,5 @@
 
-package com.google.firebase.codelab.friendlychat;
+package com.google.firebase.codelab.nutriapp;
 
 public class CodelabPreferences {
 

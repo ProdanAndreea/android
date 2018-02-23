@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.friendlychat;
+package com.google.firebase.codelab.nutriapp;
 
 /**
  * Created by Andreea on 02.01.2018.

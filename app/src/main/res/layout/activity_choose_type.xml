@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.google.firebase.codelab.friendlychat.ChooseType"
+    tools:context="com.google.firebase.codelab.nutriapp.ChooseType"
     android:layout_marginLeft="10dp">
 
 
@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="23dp"
         android:layout_marginTop="20dp"
-        android:text="As what type of user do you want to sign up?"
-
+        android:text="As what type of user would you like to sign up?"
         />
 
     <RadioGroup

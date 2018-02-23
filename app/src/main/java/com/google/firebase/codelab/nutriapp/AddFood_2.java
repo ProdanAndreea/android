@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.friendlychat;
+package com.google.firebase.codelab.nutriapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,14 +28,10 @@ import android.widget.TextView;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-
-import org.w3c.dom.Text;
-
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
-public class DisplayPersonalData extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+
+public class AddFood_2 extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     public static final String ANONYMOUS = "anonymous";
     private static final String TAG = "MainActivity";
@@ -45,18 +41,35 @@ public class DisplayPersonalData extends AppCompatActivity implements GoogleApiC
     private String mPhotoUrl;
     private SharedPreferences mSharedPreferences;
 
+    private Button mSendButton;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private GoogleApiClient mGoogleApiClient;
     private DatabaseReference mFirebaseDatabaseReference;
 
     private Button button;
-    private String formattedDate;
+    private EditText mGramEditText;
+
+    private Float carb;
+    private Float prot;
+    private Float fat;
+    private Float cal;
+    private ImageView imageView;
+    private String foodName;
+
+    private Float calcCal;
+    private Float calcCarb;
+    private Float calcProt;
+    private Float calcFat;
+
+    private Float quantity;
+    private boolean flag = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_personal_data);
+        setContentView(R.layout.activity_add_food_2);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUsername = ANONYMOUS;
@@ -83,51 +96,124 @@ public class DisplayPersonalData extends AppCompatActivity implements GoogleApiC
                 .build();
 
         // search for the specific food and get its data
-        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference().child("clients");
+        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference().child("foods");
+        foodName = getIntent().getStringExtra("EXTRA_SESSION_ID");
         mFirebaseDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    Client client = postSnapshot.getValue(Client.class);
-                    if (client.getName().equals(mFirebaseUser.getDisplayName())) {
-                        TextView weight = findViewById(R.id.weightTextView);
-                        TextView activity = findViewById(R.id.activityTextView);
-                        TextView sex = findViewById(R.id.sexTextView);
-                        TextView goal = findViewById(R.id.scopeTextView);
-                        TextView allergies = findViewById(R.id.allergiesTextView);
-                        TextView cal = findViewById(R.id.calTextView);
-                        TextView carb = findViewById(R.id.carbTextView);
-                        TextView prot = findViewById(R.id.protTextView);
-                        TextView fat = findViewById(R.id.fatTextView);
+                    Food climate = postSnapshot.getValue(Food.class);
+                    if (climate.getName().equals(foodName)) {
+                        prot = climate.getProt();
+                        cal = climate.getCal();
+                        carb = climate.getCarb();
+                        fat = climate.getFat();
 
-                        weight.setText(client.getWeight());
-                        activity.setText(client.getActivity());
-                        sex.setText(client.getSex());
-                        goal.setText(client.getScope());
-                        allergies.setText(client.getAllergies());
-                        cal.setText(Float.toString(client.getCal()));
-                        carb.setText(Float.toString(client.getCarb()));
-                        prot.setText(Float.toString(client.getProt()));
-                        fat.setText(Float.toString(client.getFat()));
+                        TextView txt = (TextView) findViewById(R.id.textView);
+                        txt.setText(foodName); //Float.toString(prot)
+
+
+
+                        imageView = (ImageView) findViewById(R.id.foodImageView);
+                        //imageview.setImageResource(climate.getPhoto());
+                        Glide
+                                .with(AddFood_2.this)
+                                .load(climate.getPhoto()) // the uri you got from Firebase
+                                .centerCrop()
+                                .into(imageView); //Your imageView variable
                     }
                 }
             }
             @Override
-            public void onCancelled(DatabaseError firebaseError) {}
+            public void onCancelled(DatabaseError firebaseError) {
+                       /*
+                        * You may print the error message.
+                       **/
+            }
         });
+
+        mGramEditText = (EditText) findViewById(R.id.gramEditText);
 
         button = (Button) findViewById(R.id.add_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
+                    quantity = Float.parseFloat(mGramEditText.getText().toString());
 
+                    calculateData();
+                    displayData();
 
                 } catch(NumberFormatException e) {
+                    EditText txt = (EditText) findViewById(R.id.gramEditText);
+                    txt.setError("Wrong input !");
                 }
+
+
 
             }
         });
+
+
+
+
+        mGramEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences
+                .getInt(CodelabPreferences.FRIENDLY_MSG_LENGTH, DEFAULT_MSG_LENGTH_LIMIT))});
+        mGramEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().trim().length() > 0) {
+                    button.setEnabled(true);
+                } else {
+                    button.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+
+    }
+
+
+    public void calculateData() {
+        calcCal = (quantity * cal) / 100;
+        calcCarb = (quantity * carb) / 100;
+        calcProt = (quantity * prot) / 100;
+        calcFat = (quantity * fat) / 100;
+
+        // reduce to 2 decimals
+        calcCal = round(calcCal, 2);
+        calcCarb = round(calcCarb, 2);
+        calcProt = round(calcProt, 2);
+        calcFat = round(calcFat, 2);
+    }
+
+    private void displayData() {
+        TextView textCalView = findViewById(R.id.textCalView);
+        TextView textCarbView = findViewById(R.id.textCarbView);
+        TextView textProtView = findViewById(R.id.textProtView);
+        TextView textFatView = findViewById(R.id.textFatView);
+
+        textCalView.setText(Float.toString(cal));
+        textCarbView.setText(Float.toString(carb));
+        textProtView.setText(Float.toString(prot));
+        textFatView.setText(Float.toString(fat));
+    }
+
+
+
+
+    /* round a float number to 2 decimal place*/
+    public static float round(float d, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
     }
 
 
@@ -141,28 +227,18 @@ public class DisplayPersonalData extends AppCompatActivity implements GoogleApiC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.display_personal_data_menu, menu);
+        inflater.inflate(R.menu.add_food_menu_2, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.diary_menu:
-                // get current date
-                Calendar c = Calendar.getInstance();
-                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-                formattedDate = df.format(c.getTime());
-
-                Intent intent = new Intent(this, Diary.class);
-                intent.putExtra("DATE", formattedDate);
-                startActivity(intent);
-                return true;
             case R.id.food_menu:
-                startActivity(new Intent(this, Foods.class));
+                startActivity(new Intent(this, Foods_2.class));
                 return true;
             case R.id.chat_menu:
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, MainActivity_2.class));
                 return true;
             case R.id.sign_out_menu:
                 mFirebaseAuth.signOut();
@@ -176,6 +252,8 @@ public class DisplayPersonalData extends AppCompatActivity implements GoogleApiC
             default:
                 return super.onOptionsItemSelected(item);
         }
+
     }
+
 
 }

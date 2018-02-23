@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.google.firebase.codelab.friendlychat.AddFood_2">
+    tools:context="com.google.firebase.codelab.nutriapp.AddFood_2">
 
 
     <ImageView
@@ -145,7 +145,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="ADD"
+        android:text="Calculate"
         android:textColor="@color/buttonTextColor"
         android:textStyle="bold"
         android:layout_below="@+id/quantity"
