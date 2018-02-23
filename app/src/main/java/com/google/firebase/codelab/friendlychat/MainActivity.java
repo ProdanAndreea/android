@@ -184,11 +184,12 @@ public class MainActivity extends AppCompatActivity implements
                                             FriendlyMessage friendlyMessage) {
 
                 mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+                // if the user had writen a text message, display the text
                 if (friendlyMessage.getText() != null) {
                     viewHolder.messageTextView.setText(friendlyMessage.getText());
                     viewHolder.messageTextView.setVisibility(TextView.VISIBLE);
                     viewHolder.messageImageView.setVisibility(ImageView.GONE);
-                } else {
+                } else {  // if the user had loaded an image as message, display the image
                     String imageUrl = friendlyMessage.getImageUrl();
                     if (imageUrl.startsWith("gs://")) {
                         StorageReference storageReference = FirebaseStorage.getInstance()

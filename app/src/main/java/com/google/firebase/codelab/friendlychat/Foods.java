@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
-
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -26,16 +25,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.google.firebase.database.DataSnapshot;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 
 public class Foods extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -209,11 +203,6 @@ public class Foods extends AppCompatActivity implements GoogleApiClient.OnConnec
                 uses the View Holder constructed in the onCreateViewHolder() method
                 to populate the current row of the RecyclerView with data
              */
-            /*
-             foodNameView   foodCalView     foodProtView        foodFatView
-            foodImageView
-            foodCarbView
-             */
             @Override
             protected void onBindViewHolder(final Foods.FoodViewHolder viewHolder,
                                             int position,
@@ -247,9 +236,6 @@ public class Foods extends AppCompatActivity implements GoogleApiClient.OnConnec
 
                 // get the Google account photo of the user
                 // and display it
-/*
-                viewHolder.foodImageView.setImageDrawable(ContextCompat.getDrawable(Foods.this,
-                        R.drawable.ic_account_circle_black_36dp)); */
                 /* if ther eisn't a photo put the default photo */
                 if (food.getPhoto() == null) {
                     viewHolder.foodImageView.setImageDrawable(ContextCompat.getDrawable(Foods.this,
@@ -271,7 +257,7 @@ public class Foods extends AppCompatActivity implements GoogleApiClient.OnConnec
                 int friendlyMessageCount = mAdapter.getItemCount();
                 int lastVisiblePosition = mLinearLayoutManager.findLastCompletelyVisibleItemPosition();
                 // If the recycler view is initially being loaded or the user is at the bottom of the list, scroll
-                // to the bottom of the list to show the newly added message.
+                // to the bottom of the list to show the newly added foods.
                 if (lastVisiblePosition == -1 ||
                         (positionStart >= (friendlyMessageCount - 1) && lastVisiblePosition == (positionStart - 1))) {
                     mRecyclerView.scrollToPosition(positionStart);
@@ -281,8 +267,6 @@ public class Foods extends AppCompatActivity implements GoogleApiClient.OnConnec
 
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-
-
     }
 
     // starting of a new action
