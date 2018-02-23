@@ -23,8 +23,5 @@
     <item
         android:id="@+id/delete_food"
         android:title="Delete Food"/>
-    <item
-        android:id="@+id/search_food"
-        android:title="Clients"/>
 
 </menu>
