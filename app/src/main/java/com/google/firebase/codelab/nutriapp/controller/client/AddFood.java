@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.nutriapp;
+package com.google.firebase.codelab.nutriapp.controller.client;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +20,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.codelab.nutriapp.CodelabPreferences;
+import com.google.firebase.codelab.nutriapp.R;
+import com.google.firebase.codelab.nutriapp.controller.sign_in.SignInActivity;
+import com.google.firebase.codelab.nutriapp.model.Client;
+import com.google.firebase.codelab.nutriapp.model.Date;
+import com.google.firebase.codelab.nutriapp.model.Food;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -254,7 +260,9 @@ public class AddFood extends AppCompatActivity implements GoogleApiClient.OnConn
 
         // save the food's data to 'diary'
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        Food food = new Food(foodName, quantity, calcCal, calcCarb, calcProt, calcFat);
+        //Food food = new Food(foodName, quantity, calcCal, calcCarb, calcProt, calcFat);
+        Food food = new Food.Builder(foodName, calcCal, calcCarb, calcProt, calcFat).setQuantity(quantity).build();
+
         mFirebaseDatabaseReference.child("diary")
                                 .child(mFirebaseUser.getDisplayName())
                                 .child(formattedDate)

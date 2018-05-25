@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.nutriapp;
+package com.google.firebase.codelab.nutriapp.model;
 
 /**
  * Created by Andreea on 02.01.2018.
