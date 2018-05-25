@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.google.firebase.codelab.nutriapp.Foods">
+    tools:context="com.google.firebase.codelab.nutriapp.controller.client.Foods">
 
     <item
         android:id="@+id/sign_out_menu"
@@ -23,5 +23,9 @@
     <item
         android:id="@+id/delete_food"
         android:title="Delete Food"/>
+
+    <item
+        android:id="@+id/generate_doc"
+        android:title="Generate Document"/>
 
 </menu>

@@ -1,5 +1,4 @@
-package com.google.firebase.codelab.nutriapp;
-
+package com.google.firebase.codelab.nutriapp.controller;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,20 +8,22 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import android.widget.EditText;
-import android.widget.ImageView;
+import com.google.firebase.codelab.nutriapp.R;
+import com.google.firebase.codelab.nutriapp.controller.client.ChooseDate;
+import com.google.firebase.codelab.nutriapp.controller.client.DisplayPersonalData;
+import com.google.firebase.codelab.nutriapp.controller.client.MainActivity;
+import com.google.firebase.codelab.nutriapp.controller.sign_in.SignInActivity;
+
+import android.widget.ProgressBar;
 
 
-public class AddNewFood extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class Add extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     public static final String ANONYMOUS = "anonymous";
     private static final String TAG = "AddNewFood";
@@ -34,16 +35,13 @@ public class AddNewFood extends AppCompatActivity implements GoogleApiClient.OnC
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private GoogleApiClient mGoogleApiClient;
-    private DatabaseReference mFirebaseDatabaseReference;
 
-    private Button button;
-    private ImageView mAddFoodImageView;
-    EditText txt;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_add_food_fb);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUsername = ANONYMOUS;
@@ -69,56 +67,10 @@ public class AddNewFood extends AppCompatActivity implements GoogleApiClient.OnC
                 .addApi(Auth.GOOGLE_SIGN_IN_API)
                 .build();
 
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-
-        button = (Button) findViewById(R.id.add_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Food food = new Food();
-                try {
-                    // get input data from 'R.id.nameEditText' and try to add it to food
-                } catch(NumberFormatException e) {
-                    txt = (EditText) findViewById(R.id.nameEditText);
-                    txt.setError("Wrong input !");
-                }
-                try {
-                } catch(NumberFormatException e) {
-                    txt = (EditText) findViewById(R.id.gramEditText);
-                    txt.setError("Wrong input !");
-                }
-                try {
-                } catch(NumberFormatException e) {
-                    txt = (EditText) findViewById(R.id.calEditText);
-                    txt.setError("Wrong input !");
-                }
-                try {
-                } catch(NumberFormatException e) {
-                    txt = (EditText) findViewById(R.id.carbEditText);
-                    txt.setError("Wrong input !");
-                }
-                try {
-                } catch(NumberFormatException e) {
-                    txt = (EditText) findViewById(R.id.protEditText);
-                    txt.setError("Wrong input !");
-                }
-                try {
-                } catch(NumberFormatException e) {
-                    txt = (EditText) findViewById(R.id.fatEditText);
-                    txt.setError("Wrong input !");
-                }
-
-                // get the photo and add it to food
-                // if there isn't one, the default one (grey) will be put
-
-
-                // add the food to the fire base
-                // go to foods table to see the new added food
-               // startActivity(new Intent(AddNewFood.this, Foods.class));
-            }
-        });
     }
+
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
@@ -168,5 +120,6 @@ public class AddNewFood extends AppCompatActivity implements GoogleApiClient.OnC
     public void onDestroy() {
         super.onDestroy();
     }
+
 
 }

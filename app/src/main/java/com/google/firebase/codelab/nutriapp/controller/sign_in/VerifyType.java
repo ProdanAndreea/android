@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.nutriapp;
+package com.google.firebase.codelab.nutriapp.controller.sign_in;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +12,10 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.codelab.nutriapp.R;
+import com.google.firebase.codelab.nutriapp.controller.client.Foods;
+import com.google.firebase.codelab.nutriapp.controller.trainer.Foods_2;
+import com.google.firebase.codelab.nutriapp.model.Trainer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

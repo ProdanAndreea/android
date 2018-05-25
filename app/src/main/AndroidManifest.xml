@@ -2,18 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.google.firebase.codelab.nutriapp">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="com.google.firebase.codelab.nutriapp.MainActivity">
-
-
-
-
-
+        android:theme="@style/AppTheme"
+        android:name="android.support.multidex.MultiDexApplication">
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.client.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -26,7 +25,7 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name="com.google.firebase.codelab.nutriapp.Foods">
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.client.Foods">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,83 +36,99 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.google.firebase.codelab.nutriapp.AddFood">
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.client.AddFood">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.google.firebase.codelab.nutriapp.Diary">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name="com.google.firebase.codelab.nutriapp.AddNewFood">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.google.firebase.codelab.nutriapp.DeleteFood">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.google.firebase.codelab.nutriapp.Add">
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.client.Diary">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-
-        <activity android:name="com.google.firebase.codelab.nutriapp.ChooseDate">
-
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.AddNewFood">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.google.firebase.codelab.nutriapp.ChooseType">
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.DeleteFood">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.google.firebase.codelab.nutriapp.VerifyType">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.google.firebase.codelab.nutriapp.PersonalData">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.google.firebase.codelab.nutriapp.PersonalData2">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.google.firebase.codelab.nutriapp.DisplayPersonalData">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.google.firebase.codelab.nutriapp.Foods_2">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.google.firebase.codelab.nutriapp.MainActivity_2">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.google.firebase.codelab.nutriapp.AddFood_2">
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.Add">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
 
-        <activity android:name="com.google.firebase.codelab.nutriapp.SignInActivity" />
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.client.ChooseDate">
+
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.sign_in.ChooseType">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.sign_in.VerifyType">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.sign_in.PersonalData">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.sign_in.PersonalData2">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.client.DisplayPersonalData">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.trainer.Foods_2">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.trainer.MainActivity_2">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.trainer.AddFood_2">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.client.doc_generator.PDFCreator">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.client.doc_generator.ChooseDocType">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.client.doc_generator.CSVCreator">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+
+        <activity android:name="com.google.firebase.codelab.nutriapp.controller.sign_in.SignInActivity" />
 
         <service
             android:name="com.google.firebase.codelab.nutriapp.MyFirebaseMessagingService"

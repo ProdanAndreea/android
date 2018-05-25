@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.nutriapp;
+package com.google.firebase.codelab.nutriapp.controller;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +16,13 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.codelab.nutriapp.R;
+import com.google.firebase.codelab.nutriapp.controller.client.ChooseDate;
+import com.google.firebase.codelab.nutriapp.controller.client.DisplayPersonalData;
+import com.google.firebase.codelab.nutriapp.controller.client.Foods;
+import com.google.firebase.codelab.nutriapp.controller.client.MainActivity;
+import com.google.firebase.codelab.nutriapp.controller.sign_in.SignInActivity;
+import com.google.firebase.codelab.nutriapp.model.Food;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -71,7 +78,7 @@ public class DeleteFood extends AppCompatActivity implements GoogleApiClient.OnC
                 .addApi(Auth.GOOGLE_SIGN_IN_API)
                 .build();
 
-        button = (Button) findViewById(R.id.add_button);
+        button = (Button) findViewById(R.id.delete_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

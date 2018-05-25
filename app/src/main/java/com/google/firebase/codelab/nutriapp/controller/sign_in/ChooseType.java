@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.nutriapp;
+package com.google.firebase.codelab.nutriapp.controller.sign_in;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +14,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.codelab.nutriapp.R;
+import com.google.firebase.codelab.nutriapp.controller.trainer.Foods_2;
+import com.google.firebase.codelab.nutriapp.model.Trainer;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -110,7 +113,9 @@ public class ChooseType extends AppCompatActivity implements GoogleApiClient.OnC
 
     private void addToFirebase() {
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        Trainer t = new Trainer(mFirebaseUser.getDisplayName());
+        Trainer t = Trainer.getInstance();
+        t.setName(mFirebaseUser.getDisplayName());
+
         mFirebaseDatabaseReference.child("trainers")
                 //.child(mFirebaseUser.getDisplayName())
                 .push().setValue(t);

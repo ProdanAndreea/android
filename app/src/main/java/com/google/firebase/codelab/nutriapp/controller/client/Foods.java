@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.nutriapp;
+package com.google.firebase.codelab.nutriapp.controller.client;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +23,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.codelab.nutriapp.controller.AddNewFood;
+import com.google.firebase.codelab.nutriapp.controller.DeleteFood;
+import com.google.firebase.codelab.nutriapp.R;
+import com.google.firebase.codelab.nutriapp.controller.client.doc_generator.ChooseDocType;
+import com.google.firebase.codelab.nutriapp.controller.sign_in.SignInActivity;
+import com.google.firebase.codelab.nutriapp.model.Food;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import android.view.View;
@@ -324,6 +330,9 @@ public class Foods extends AppCompatActivity implements GoogleApiClient.OnConnec
                 mPhotoUrl = null;
                 startActivity(new Intent(this, SignInActivity.class));
                 finish();
+                return true;
+            case R.id.generate_doc:
+                startActivity(new Intent(this, ChooseDocType.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

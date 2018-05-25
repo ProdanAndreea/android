@@ -1,19 +1,4 @@
-/**
- * Copyright Google Inc. All Rights Reserved.
- * <p/>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p/>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p/>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package com.google.firebase.codelab.nutriapp;
+package com.google.firebase.codelab.nutriapp.controller.client;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -45,7 +30,6 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.auth.api.Auth;
@@ -64,6 +48,10 @@ import com.google.firebase.appindexing.builders.Indexables;
 import com.google.firebase.appindexing.builders.PersonBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.codelab.nutriapp.CodelabPreferences;
+import com.google.firebase.codelab.nutriapp.R;
+import com.google.firebase.codelab.nutriapp.controller.sign_in.SignInActivity;
+import com.google.firebase.codelab.nutriapp.model.FriendlyMessage;
 import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -80,7 +68,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Test extends AppCompatActivity implements
+public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener {
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
@@ -130,7 +118,7 @@ public class Test extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test);
+        setContentView(R.layout.activity_main);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUsername = ANONYMOUS;
@@ -161,8 +149,12 @@ public class Test extends AppCompatActivity implements
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setStackFromEnd(true);
 
+        /* This code initially adds all existing messages then
+        listens for new child entries under the messages path in your Firebase Realtime Database.
+        It adds a new element to the UI for each message:
+         */
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-
+        // New child entries
         SnapshotParser<FriendlyMessage> parser = new SnapshotParser<FriendlyMessage>() {
             @Override
             public FriendlyMessage parseSnapshot(DataSnapshot dataSnapshot) {
@@ -195,30 +187,31 @@ public class Test extends AppCompatActivity implements
                                             FriendlyMessage friendlyMessage) {
 
                 mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+                // if the user had writen a text message, display the text
                 if (friendlyMessage.getText() != null) {
                     viewHolder.messageTextView.setText(friendlyMessage.getText());
                     viewHolder.messageTextView.setVisibility(TextView.VISIBLE);
                     viewHolder.messageImageView.setVisibility(ImageView.GONE);
-                } else {
+                } else {  // if the user had loaded an image as message, display the image
                     String imageUrl = friendlyMessage.getImageUrl();
                     if (imageUrl.startsWith("gs://")) {
                         StorageReference storageReference = FirebaseStorage.getInstance()
                                 .getReferenceFromUrl(imageUrl);
                         storageReference.getDownloadUrl().addOnCompleteListener(
                                 new OnCompleteListener<Uri>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Uri> task) {
-                                        if (task.isSuccessful()) {
-                                            String downloadUrl = task.getResult().toString();
-                                            Glide.with(viewHolder.messageImageView.getContext())
-                                                    .load(downloadUrl)
-                                                    .into(viewHolder.messageImageView);
-                                        } else {
-                                            Log.w(TAG, "Getting download url was not successful.",
-                                                    task.getException());
-                                        }
-                                    }
-                                });
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if (task.isSuccessful()) {
+                                    String downloadUrl = task.getResult().toString();
+                                    Glide.with(viewHolder.messageImageView.getContext())
+                                            .load(downloadUrl)
+                                            .into(viewHolder.messageImageView);
+                                } else {
+                                    Log.w(TAG, "Getting download url was not successful.",
+                                            task.getException());
+                                }
+                            }
+                        });
                     } else {
                         Glide.with(viewHolder.messageImageView.getContext())
                                 .load(friendlyMessage.getImageUrl())
@@ -231,10 +224,10 @@ public class Test extends AppCompatActivity implements
 
                 viewHolder.messengerTextView.setText(friendlyMessage.getName());
                 if (friendlyMessage.getPhotoUrl() == null) {
-                    viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(Test.this,
+                    viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,
                             R.drawable.ic_account_circle_black_36dp));
                 } else {
-                    Glide.with(Test.this)
+                    Glide.with(MainActivity.this)
                             .load(friendlyMessage.getPhotoUrl())
                             .into(viewHolder.messengerImageView);
                 }
@@ -267,11 +260,9 @@ public class Test extends AppCompatActivity implements
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
         mMessageRecyclerView.setAdapter(mFirebaseAdapter);
 
-        /// reclama ?
-        // Initialize and request AdMob ad.
-        mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        ////////////////////
+
+
 
         // Initialize Firebase Measurement.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -282,8 +273,8 @@ public class Test extends AppCompatActivity implements
         // Define Firebase Remote Config Settings.
         FirebaseRemoteConfigSettings firebaseRemoteConfigSettings =
                 new FirebaseRemoteConfigSettings.Builder()
-                        .setDeveloperModeEnabled(true)
-                        .build();
+                .setDeveloperModeEnabled(true)
+                .build();
 
         // Define default config values. Defaults are used when fetched config values are not
         // available. Eg: if an error occurred fetching values from the server.
@@ -319,6 +310,9 @@ public class Test extends AppCompatActivity implements
             }
         });
 
+        /*
+            allow the user to select an image from the device's local storage
+        */
         mAddMessageImageView = (ImageView) findViewById(R.id.addMessageImageView);
         mAddMessageImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -330,6 +324,12 @@ public class Test extends AppCompatActivity implements
             }
         });
 
+        // send new message introduced by the user to database
+        /*
+             creates a new FriendlyMessage object with the contents of the message field, and pushes the message to the database
+             The push() method adds an automatically generated ID to the pushed object's path.
+             These IDs are sequential which ensures that the new messages will be added to the end of the list.
+         */
         mSendButton = (Button) findViewById(R.id.sendButton);
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -351,6 +351,9 @@ public class Test extends AppCompatActivity implements
                 .build();
     }
 
+    /*
+        to create a message to write to the on-device index
+     */
     private Indexable getMessageIndexable(FriendlyMessage friendlyMessage) {
         PersonBuilder sender = Indexables.personBuilder()
                 .setIsSelf(mUsername.equals(friendlyMessage.getName()))
@@ -371,11 +374,12 @@ public class Test extends AppCompatActivity implements
         return messageToIndex;
     }
 
+
+
+    // Appropriately start and stop listening for updates from Firebase Realtime Database
     @Override
     public void onPause() {
-        if (mAdView != null) {
-            mAdView.pause();
-        }
+
         mFirebaseAdapter.stopListening();
         super.onPause();
     }
@@ -383,34 +387,33 @@ public class Test extends AppCompatActivity implements
     @Override
     public void onResume() {
         super.onResume();
-        if (mAdView != null) {
-            mAdView.resume();
-        }
+
         mFirebaseAdapter.startListening();
     }
 
     @Override
     public void onDestroy() {
-        if (mAdView != null) {
-            mAdView.destroy();
-        }
+
         super.onDestroy();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.test, menu);
+        inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.chat_menu:
-                startActivity(new Intent(this, MainActivity.class));
-                // finish();
-                 return true;
+            case R.id.display_personal_data_menu:
+                startActivity(new Intent(this, DisplayPersonalData.class));
+                return true;
+            case R.id.test:
+                startActivity(new Intent(this, Foods.class));
+                finish();
+                return true;
             case R.id.invite_menu:
                 sendInvitation();
                 return true;
@@ -474,6 +477,13 @@ public class Test extends AppCompatActivity implements
                 });
     }
 
+    /*
+          Handle image selection and write temp message
+          Once the user has selected an image a call to the MainActivity's onActivityResult will be fired
+          This is where the user's image selection is handled
+          In this function you write a message with a temporary image url to the database
+         indicating the image is being uploaded.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -496,9 +506,9 @@ public class Test extends AppCompatActivity implements
                                         String key = databaseReference.getKey();
                                         StorageReference storageReference =
                                                 FirebaseStorage.getInstance()
-                                                        .getReference(mFirebaseUser.getUid())
-                                                        .child(key)
-                                                        .child(uri.getLastPathSegment());
+                                                .getReference(mFirebaseUser.getUid())
+                                                .child(key)
+                                                .child(uri.getLastPathSegment());
 
                                         putImageInStorage(storageReference, uri, key);
                                     } else {
@@ -530,8 +540,12 @@ public class Test extends AppCompatActivity implements
         }
     }
 
+    /*
+         initiate the upload of the selected image
+         Once the upload is complete, update the message to use the appropriate image.
+     */
     private void putImageInStorage(StorageReference storageReference, Uri uri, final String key) {
-        storageReference.putFile(uri).addOnCompleteListener(Test.this,
+        storageReference.putFile(uri).addOnCompleteListener(MainActivity.this,
                 new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {

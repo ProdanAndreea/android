@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.google.firebase.codelab.nutriapp.PersonalData2"
+    tools:context="com.google.firebase.codelab.nutriapp.controller.sign_in.PersonalData2"
     android:layout_marginLeft="10dp"
     android:weightSum="1">
 
